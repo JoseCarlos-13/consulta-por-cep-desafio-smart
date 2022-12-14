@@ -1,13 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'Ceps', type: :request do
+RSpec.describe 'Addresses', type: :request do
   describe 'GET#search_address_by_cep' do
     context 'when a cep is used for to search a address' do
       let(:address_params) { { cep: '54250610' } }
 
       before do
-        get '/ceps/search_address_by_cep', params: address_params
-        # binding.pry
+        get '/addresses/search_address_by_cep', params: address_params
       end
 
       it 'must return 200 status code' do
@@ -15,8 +14,8 @@ RSpec.describe 'Ceps', type: :request do
       end
 
       it 'must return the address found' do
-        expect(json_body).to include(:address, :neighborhood, :city, :uf,
-                                     :full_address)
+        expect(json_body).to include(:address, :neighborhood, :city, :state,
+                                     :complement)
       end
     end
   end
